@@ -10,13 +10,19 @@ class Pilha(object):
       self.items = []
 
     def adicionar(self, item):
-        for elemento in item:
-            self.items.append(elemento)
+        self.items.append(item)
 
-    def retirar(self):
+    def adicionarPalavra(self, palavra):
+        for letra in palavra:
+            self.items.append(letra)
+
+    def remover(self):
         if not self.estaVazio():
             return self.items.pop()
-        raise Exception
+        raise IndexError("A pilha ja esta vazia!")
+
+    def getItems(self):
+        return self.__items
 
     def tamanho(self):
         return len(self.items)
@@ -27,40 +33,26 @@ class Pilha(object):
     def topo(self):
         return self.items[-1]
 
+def estaNoModeloXY(palavra: str):
+    if len(palavra) % 2 != 0 or palavra == '':
+        return print("Nao esta no modelo XY")
 
-def estaNoModeloXY(p1: object):
-    if p1.tamanho() % 2 != 0 or p1.estaVazio():
-        return "Nao está no modelo XY"
-    
-    p2 = Pilha()
-    
-    for _ in range(p1.tamanho() // 2):
-        p2.adicionar(p1.topo())
-        p1.retirar()
-        
-        # pilha1 = A B B A =>
 
-        # pilha1 = A B B
-        # pilha2 = A
+    # Desnecessario, mas fiz isso por fins didáticos
+    x = palavra[:len(palavra) // 2] # x = primeira metade da palavra
+    y = palavra[len(palavra) // 2:] # y = segunda metade da palavra
 
-        # pilha1 = A B
-        # pilha2 = A B
+    p1 = Pilha()
+    p1.adicionarPalavra(y)
 
-    while not p2.estaVazio():
-        if p1.topo() == p2.topo():
-            p1.retirar()
-            p2.retirar()
+    for letra in x:
+        if letra == p1.topo():
+            p1.remover()
+        else:
+            return print("Nao esta no modelo XY")
 
-        else: 
-            return "Nao esta no modelo XY"
-    return "Esta no modelo XY"
+    return print("Esta no modelo XY")
 
-palavra = input()
+entrada = input()
 
-pilha1 = Pilha()
-
-pilha1.adicionar(palavra)
-
-print(pilha1.items)
-
-print(estaNoModeloXY(pilha1))
+estaNoModeloXY(entrada)
