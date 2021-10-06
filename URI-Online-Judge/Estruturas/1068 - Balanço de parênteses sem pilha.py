@@ -1,18 +1,18 @@
 while True:
 	try:
-		p1 = 0
+		contador = 0
 		N = input()
 
-		for x in N:
-			if x == '(':
-				p1 += 1
-			elif x == ')':
-			    if p1 == 0:
-			        p1 -= 1
+		for i in N:
+			if i == '(':
+				contador += 1
+			elif i == ')':
+			    if contador == 0:
+			        contador = -1
 			        break
-			    p1 -= 1
+			    contador -= 1
 
-		if p1 == 0:
+		if contador == 0:
 			print('correct')
 		else:
 			print('incorrect')

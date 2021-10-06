@@ -9,15 +9,9 @@ class Pilha(object):
         if not self.estaVazia():
             return self.__items.pop()
         raise IndexError("A pilha ja esta vazia!")
-    
-    def getItems(self):
-        return self.__items
-
-    def tamanho(self):
-        return len(self.__items)
 
     def estaVazia(self):
-        return self.tamanho() == 0
+        return len(self.__items) == 0
     
 def balancoDeParenteses(palavra: str):
     pilha = Pilha()

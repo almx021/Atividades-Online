@@ -6,35 +6,36 @@ class MyQueue(object):
     
     def push(self, x):
         if self.empty():
-            self.__stack1.append(x)            
+            self.__stack1.append(x)         
         else:
-            while not self.empty():
+            while len(self.__stack1) > 0:
                 self.__stack2.append(self.__stack1.pop())
+            
             self.__stack1.append(x)
 
             while len(self.__stack2) > 0:
                 self.__stack1.append(self.__stack2.pop())
-
-        """
-        :type x: int
-        :rtype: None
-        """
         
     def pop(self):
         return self.__stack1.pop()
-        """
-        :rtype: int
-        """
         
     def peek(self):
         if not self.empty():
             return self.__stack1[-1]
-        """
-        :rtype: int
-        """
         
     def empty(self):
         return len(self.__stack1) == 0
-        """
-        :rtype: bool
-        """
+
+    def getItems(self):
+        return self.__stack1
+
+
+q = MyQueue()
+
+q.push(1)
+q.push(2)
+q.push(3)
+q.push(4)
+print(q.peek())
+print(q.pop())
+print(q.peek())
